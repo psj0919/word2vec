@@ -12,9 +12,7 @@ from gensim.models import KeyedVectors
 
 
 if __name__ == '__main__':
-    gpu_id = '0'
-    device = torch.device("cuda:{}".format(gpu_id) if torch.cuda.is_available() else "cpu")
-    print(device)
+
     # download_data
     urllib.request.urlretrieve(
         "https://raw.githubusercontent.com/ukairia777/tensorflow-nlp-tutorial/main/09.%20Word%20Embedding/dataset/ted_en-20160408.xml",
@@ -24,7 +22,7 @@ if __name__ == '__main__':
     target_text = etree.parse(targetXML)
     parse_text = '\n'.join(target_text.xpath('//content/text()'))
     content_text = re.sub(r'\([^)]*\)', '', parse_text)
-    sent_text = sent_tokenize(content_text).to(device)
+    sent_text = sent_tokenize(content_text[0:1000000]) # content_text가 너무 커서 슬라이싱 하여 임의로 학습시킴
     normalized_text = []
     for string in sent_text:
         tokens = re.sub(r"[^a-z0-9]+", " ", string.lower())
