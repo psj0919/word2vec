@@ -33,7 +33,7 @@ def evaluate(model, val_iter):
 
     predicted_labels = logit.max(1)[1].view(y.size()).data
     print("GT : {},".format(y.data), end='\n')
-    print("predict : {}".format(predicted_labels.data))
+    print("PD : {}".format(predicted_labels.data))
 
     size = len(val_iter.dataset)
     avg_loss = total_loss / size
