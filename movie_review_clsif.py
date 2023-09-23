@@ -31,6 +31,10 @@ def evaluate(model, val_iter):
         total_loss += loss.item()
         corrects += (logit.max(1)[1].view(y.size()).data == y.data).sum()
 
+    predicted_labels = logit.max(1)[1].view(y.size()).data
+    print("GT : {},".format(y.data), end='\n')
+    print("predict : {}".format(predicted_labels.data))
+
     size = len(val_iter.dataset)
     avg_loss = total_loss / size
     avg_accuracy = 100.0 * corrects / size
@@ -44,9 +48,9 @@ if __name__=='__main__':
 
     gpu_id = "1"
     device = torch.device("cuda:{}".format(gpu_id) if torch.cuda.is_available() else "cpu")
-    BATCH_SIZE = 64 # batch_size
+    BATCH_SIZE = 128 # batch_size
     lr = 0.001 # learning_rate
-    EPOCHS = 10 # epoch
+    EPOCHS = 100 # epoch
     # --------------------data_download -----------------------
     TEXT = Field(sequential=True, batch_first=True, lower=True)
     LABEL = Field(sequential=False, batch_first=True)
@@ -55,7 +59,7 @@ if __name__=='__main__':
     # -------------data_load & validation ----------------
     trainset, testset = datasets.IMDB.splits(TEXT, LABEL)
 
-    print(vars(trainset[0])) # text IMDB 리뷰에 해당하고 label 은 pos positive의 줄임말
+    #print(vars(trainset[0])) # text IMDB 리뷰에 해당하고 label 은 pos positive의 줄임말
     # -----------------------------------------------------
 
 
@@ -65,9 +69,9 @@ if __name__=='__main__':
 
     vocab_size = len(TEXT.vocab)
     n_classes = 2
-    print('단어 집합의 크기 : {}'.format(vocab_size))
-    print('클래스의 개수 : {}'.format(n_classes))
-    print(TEXT.vocab.stoi)
+    #print('단어 집합의 크기 : {}'.format(vocab_size))
+    #print('클래스의 개수 : {}'.format(n_classes))
+    #print(TEXT.vocab.stoi)
     # ------------------------------------------------------------
 
     # -------------------------data_loader------------------------
