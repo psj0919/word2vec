@@ -6,10 +6,15 @@ from tqdm import tqdm
 import spacy
 import torch
 
+
+from konlpy.tag import _kkma #OKT 와 같은 한국어 형태소 분석기 중 하나
+from transformers import AutoTokenizer #OKT 와 같은 한국어 형태소 분석기 중 하나
+
 if __name__ == '__main__':
     urllib.request.urlretrieve("https://raw.githubusercontent.com/e9t/nsmc/master/ratings.txt", filename="./data/ratings.txt")
     train_data = pd.read_table('./data/ratings.txt')
     print(train_data[:5])
+    # 결측값(NULL) 유무 확인
     print(train_data.isnull().values.any())
     train_data = train_data.dropna(how='any')
     print(train_data.isnull().values.any())

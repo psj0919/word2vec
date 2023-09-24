@@ -51,9 +51,11 @@ if __name__=='__main__':
     BATCH_SIZE = 128 # batch_size
     lr = 0.001 # learning_rate
     EPOCHS = 100 # epoch
-    # --------------------data_download -----------------------
+    # --------------------data_preprocessing -----------------------
     TEXT = Field(sequential=True, batch_first=True, lower=True)
     LABEL = Field(sequential=False, batch_first=True)
+    #텐서 변환 및 데이터 유형을 정하기 위해 사용
+    #sequential: 순서 반영, lower: 소문자화, batch_first: 배치를 제일먼저 출력소문자화
     # ---------------------------------------------------------
 
     # -------------data_load & validation ----------------

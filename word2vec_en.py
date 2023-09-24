@@ -22,7 +22,7 @@ if __name__ == '__main__':
     target_text = etree.parse(targetXML)
     parse_text = '\n'.join(target_text.xpath('//content/text()'))
     content_text = re.sub(r'\([^)]*\)', '', parse_text) #괄호로 구성된 내용을 제거
-    sent_text = sent_tokenize(content_text[0:1000000]) # content_text가 48124712 너무 커서 슬라이싱 하여 임의로 학습시킴
+    sent_text = sent_tokenize(content_text[0:1000000]) # content_text가 48124712 너무 커서 슬라이싱 하여 임의로 학습시킴, 문장 토큰화
     normalized_text = []
     # 각 문장에 대해서 구두점을 제거하고, 대문자를 소문자로 변환.
     for string in sent_text:
