@@ -58,7 +58,6 @@ if __name__=='__main__':
 
     # -------------data_load & validation ----------------
     trainset, testset = datasets.IMDB.splits(TEXT, LABEL)
-
     #print(vars(trainset[0])) # text IMDB 리뷰에 해당하고 label 은 pos positive의 줄임말
     # -----------------------------------------------------
 
@@ -84,7 +83,7 @@ if __name__=='__main__':
     # --------------------------------------------------------------
 
     # -----------------------train----------------------------------------------------
-    model = GRU(1, 256, vocab_size, 128, n_classes, 0.5).to(device)
+    model = GRU(1, 512, vocab_size,256, n_classes, 0.5).to(device)
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     best_val_loss = None
     for e in range(1, EPOCHS+1):
